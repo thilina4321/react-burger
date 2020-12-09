@@ -16,7 +16,7 @@ const burger = (props) => {
 
   return (
     <div className="burger">
-      <BurgerIngredient type="BreadTop" />
+      <BurgerIngredient className="bt" type="BreadTop" />
       {tf}
       <BurgerIngredient type="BreadBottom" />
 

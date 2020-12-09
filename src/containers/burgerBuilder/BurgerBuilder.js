@@ -3,6 +3,9 @@ import Burger from "../../components/Burger/Burger";
 import BurgerController from "../../components/Burger/BurgerControl/BurgerCon";
 import BurgerSummery from "../../components/Burger/OrderSummery/OrderSummery";
 
+import axios from '../../Axios'
+
+
 const INGREDIENT_PRICES = {
   Cheese: 1,
   Meat: 2,
@@ -12,9 +15,18 @@ const INGREDIENT_PRICES = {
 
 class BurgerBuilder extends Component {
   state = {
-    ingredient: { Cheese: 0, Meat: 0, Bacon: 0, Salad: 0 },
+    ingredient: null ,
     totalPrice: 0,
+    isLoading :false
   };
+
+  async componentDidMount(){
+    const ingredients = await axios.get('ingredients.json')
+    console.log(ingredients.data);
+    this.setState({
+      ingredient:ingredients.data
+    })
+  }
 
   addHandler = (type) => {
     let newCount = this.state.ingredient[type] + 1;
@@ -46,16 +58,20 @@ class BurgerBuilder extends Component {
   render() {
     return (
       <Fragment>
-        <Burger 
-        
-        ingredient={this.state.ingredient} />
-        <BurgerController 
-        
-        price={this.state.totalPrice}
-        less={this.removeHandler}
-        more={this.addHandler} />
+        { this.state.ingredient &&
+          <div>
+            <Burger          
+            ingredient={this.state.ingredient} />
+            <BurgerController 
+            price={this.state.totalPrice}
+            less={this.removeHandler}
+            more={this.addHandler} />
 
-        <BurgerSummery summery={this.state.ingredient}/>
+            <BurgerSummery 
+            total={this.state.totalPrice}
+            summery={this.state.ingredient}/>
+          </div>  
+        }   
       </Fragment>
     );
   }

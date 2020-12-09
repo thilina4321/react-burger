@@ -2,9 +2,14 @@ import { Component } from "react";
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@material-ui/core";
 import "./orderSummery.css";
 
+import axios from '../../../Axios'
+import Spinner from '../../UI/Spinner'
+
+
 class OrderSummery extends Component {
   state = {
     toggleBtn: false,
+    isLoaing:false
   };
 
   toggleSummeryButton = () => {
@@ -14,16 +19,28 @@ class OrderSummery extends Component {
     });
   };
 
-  purchaseOrder = ()=> {
-      alert('Thanks and come againg')
+  purchaseOrder = async()=> {
     this.setState({
       toggleBtn: false,
     });
+    this.setState({
+      isLoaing :true
+    })
+    console.log(this.props.summery);
+    await axios.post('orders.json', {
+      ingredients:this.props.summery,
+      total:this.props.total
+    })
+    this.setState({
+      isLoaing :false
+    })
   }
 
   render() {
     return (
       <div className="summery">
+
+      {this.state.isLoaing && <Spinner/>}
         <Button
           className="summeryBtn"
           color="primary"
@@ -49,6 +66,7 @@ class OrderSummery extends Component {
             ) : null;
           })}
 
+          <p> Your total price : {this.props.total} </p>
           <p> Do you want to continue </p>
           <Button onClick={this.toggleSummeryButton} color="primary"> Cancel </Button>
           <Button

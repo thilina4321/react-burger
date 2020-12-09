@@ -1,23 +1,21 @@
+.bctrl__main{
+    text-align: center;
+}
 .burCtrl{
-    box-sizing: border-box;
-    width: 100%;
     padding: 5px;
     margin: auto;
     text-align: center;
-    margin: 16px;
     color: white;
-    background-color: brown;
+    background-color: rgba(61, 50, 3, 0.664);
 }
 
 .burCtrl__span{
     padding: 5px;
+    margin: 10px;
 }
 
-.burCtrl__btn{
-    margin-right: 10px;
-    padding: 5px;
-    background-color: green;
-    color: white;
+.burCtrl__a{
+    margin: 20px;
 }
 
 .bcOrder{

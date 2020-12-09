@@ -1,8 +1,10 @@
 .burger{
-    margin: 20px;
     width: 80%;
-    margin: auto;
-    height: 40vh;
+    margin: 55px auto;
+    margin-bottom: 0;
+    height: 30vh;
     overflow: scroll;
+    scroll-behavior: smooth;
     text-align: center;
 }
+

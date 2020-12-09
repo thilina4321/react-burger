@@ -1,3 +1,4 @@
+import { Button } from "@material-ui/core";
 import "./BurgerCon.css";
 const burgerContl = (props) => {
   const ctrl = [
@@ -8,31 +9,28 @@ const burgerContl = (props) => {
   ];
 
   return (
+    <div className="bctrl__main">
     <div className="burCtrl">
            <p> Totol price : {props.price} </p>
       {ctrl.map((el) => {
         return (
-          <div key={el.label}>
+          <div className="burCtrl__a"
+          key={el.label}>
             <span className="burCtrl__span"> {el.label}</span>
-            <button
-              onClick={() => props.more(el.type)}
-              className="burCtrl__btn"
-            >
-              {" "}
-              More{" "}
-            </button>
-            <button
-              onClick={() => props.less(el.type)}
-              className="burCtrl__btn"
-            >
-              {" "}
-              Less{" "}
-            </button>
+
+
+            <Button color="primary" variant="contained"
+              onClick={() => props.more(el.type)}> More</Button>
+
+            <Button variant="contained" color="primary" 
+              onClick={() => props.less(el.type)}>Less</Button> 
+              
           </div>
         );
       })}
-      <button disabled={props.price === 0}
-       className="bcOrder"> Order Now </button>
+
+      
+    </div>
     </div>
   );
 };
